@@ -1,0 +1,89 @@
+<ion-content>
+    <div class="card">
+        <div class="card-header">
+            {{ pageTitle }}
+        </div>
+
+        <div class="card-body">
+            <form novalidate (ngSubmit)="saveHuerto()" [formGroup]="huertoForm">
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label" for="huertotNameId">Nombre</label
+          >
+          <div class="col-md-8">
+            <input
+              class="form-control"
+              id="huertoNameId"
+              type="text"
+              placeholder="Nombre de tu huerto"
+              formControlName="name"
+              name="name"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="ratingId">Tamaño</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" id="sizeId" type="text" placeholder="M²" formControlName="size" name="rating" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <label class="col-md-2 col-form-label" for="disponibilidadId">Disponibilidad</label
+          >
+
+          <div class="col-md-8">
+            <select
+              class="form-control"
+              id="disponibilidadId"
+              placeholder="Disponibilidad"
+              formControlName="disponibilidad"
+              name="disponibilidad"
+            >
+              <option>Si</option>
+              <option>No</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="productosId"
+            >Productos</label
+          >
+
+          <div class="col-md-8">
+            <input
+              class="form-control"
+              id="productosId"
+              placeholder="Productos"
+              formControlName="productos"
+              name="productos"
+            />
+          </div>
+        </div>
+
+        <div class="form-group row mb-2">
+          <label class="col-md-2 col-form-label" for="imageId">Foto</label>
+
+                    <div class="col-md-8">
+                        <input class="form-control" id="imageId" placeholder="Link de la foto" formControlName="image" name="image" />
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <div class="offset-md-2 col-md-4">
+                        <button class="btn btn-primary mr-3" type="submit">Save</button>
+                        <button class="btn btn-outline-secondary mr-3" type="button" title="Cancel your edits" [routerLink]="['']">
+              Cancel
+            </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="alert alert-danger" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+    </div>
+</ion-content>
