@@ -10,13 +10,15 @@ import { Huerto } from '../shared/huerto';
   providedIn: 'root',
 })
 export class HuertoService {
-  private huertosUrl = 'api/huertos';
+  private huertosUrl = 'http://localhost:8000/huertos';
 
   constructor(private http: HttpClient) {}
 
   getHuertos(): Observable<Huerto[]> {
     return this.http.get<Huerto[]>(this.huertosUrl).pipe(
-      tap((data) => console.log(JSON.stringify(data))),
+      tap((data) => {
+        console.log(JSON.stringify(data));
+      }),
       catchError(this.handleError)
     );
   }

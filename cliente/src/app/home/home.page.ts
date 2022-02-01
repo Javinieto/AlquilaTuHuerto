@@ -9,17 +9,17 @@ import { Huerto } from '../shared/huerto';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit, ViewDidEnter {
-  huertos: Huerto[] = [];
+  huertos: any;
   constructor(private huertoService: HuertoService) {}
   ionViewDidEnter(): void {
-    this.huertoService
-      .getHuertos()
-      .subscribe((data: Huerto[]) => (this.huertos = data));
+    this.huertoService.getHuertos().subscribe((data: Huerto[]) => {
+      this.huertos = data;
+    });
   }
 
   ngOnInit() {
-    this.huertoService
-      .getHuertos()
-      .subscribe((data: Huerto[]) => (this.huertos = data));
+    this.huertoService.getHuertos().subscribe((data: Huerto[]) => {
+      this.huertos = data[0];
+    });
   }
 }
