@@ -63,16 +63,16 @@ export class HuertoEditComponent implements OnInit {
 
   getHuerto(id: number): void {
     this.huertoService.getHuertoById(id).subscribe(
-      (huerto: Huerto) => this.displayHuerto(huerto),
+      (huerto: Huerto) => this.displayHuerto(huerto[0]),
       (error: any) => (this.errorMessage = <any>error)
     );
   }
 
-  displayHuerto(huerto: Huerto): void {
+  displayHuerto(huertos: Huerto): void {
     if (this.huertoForm) {
       this.huertoForm.reset();
     }
-    this.huerto = huerto;
+    this.huerto = huertos[0];
     this.pageTitle = `Edit Huerto: ${this.huerto.name}`;
 
     // Update the data on the form
@@ -107,7 +107,9 @@ export class HuertoEditComponent implements OnInit {
         this.huerto.id = this.huertoId;
 
         this.huertoService.updateHuerto(this.huerto).subscribe(
-          () => this.onSaveComplete(),
+          () => {
+            this.onSaveComplete();
+          },
           (error: any) => (this.errorMessage = <any>error)
         );
       } else {

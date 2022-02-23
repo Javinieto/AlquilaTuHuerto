@@ -5,7 +5,7 @@ import { HuertoEditComponent } from './huerto-edit/huerto-edit.component';
 import { HuertoNewComponent } from './huerto-new/huerto-new.component';
 
 const routes: Routes = [
-  { path: 'huertos/:huertoid/new', component: HuertoNewComponent },
+  { path: 'huertos/new', component: HuertoNewComponent },
   { path: 'huertos/:huertoid', component: HuertoDetailComponent },
   { path: 'huertos/:id/edit', component: HuertoEditComponent },
 ];

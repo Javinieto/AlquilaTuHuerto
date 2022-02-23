@@ -10,7 +10,8 @@ import { Huerto } from '../shared/huerto';
   providedIn: 'root',
 })
 export class HuertoService {
-  private huertosUrl = 'http://localhost:8000/huertos';
+  private huertosUrl = 'https://localhost:8000/huertos';
+  private newHuertoUrl = 'https://localhost:8000/huertos/new';
 
   constructor(private http: HttpClient) {}
 
@@ -48,11 +49,16 @@ export class HuertoService {
 
   createHuerto(huerto: Huerto): Observable<Huerto> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    //huerto.id = this.getHuertos.length + 1;
+    huerto.id = null;
     return this.http
-      .post<Huerto>(this.huertosUrl, huerto, { headers: headers })
+      .post<any>(this.newHuertoUrl, JSON.stringify(huerto), {
+        headers: headers,
+      })
       .pipe(
         tap((data) => console.log('createHuerto: ' + JSON.stringify(data))),
+        map((data) => {
+          return data.huerto;
+        }),
         catchError(this.handleError)
       );
   }

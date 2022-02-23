@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Huerto;
 
 class HuertoController extends AbstractController
 {
     /**
-     * @Route("/huertos", name="huertos")
+     * @Route("/huertos", name="huertos", methods="get")
      */
     public function recogerHuertos(): Response
     {
@@ -33,7 +34,7 @@ class HuertoController extends AbstractController
  }
     
     /** 
-     * @Route("/huerto/{id}", name="getById")
+     * @Route("/huertos/{id}", name="getById", methods="get")
      */
     public function getById($id)
     {
@@ -53,11 +54,13 @@ class HuertoController extends AbstractController
     }
 
     /**
-     * @Route("/huertos", name="new", methods="new")
+     * @Route("/huertos/new", name="huerto-new", methods="post")
      */
 
     public function newHuerto(Request $request)
     {
+        $er = $this->getDoctrine()->getManager();
+
         $data = $request->getContent();
         $huerto_stClass = json_decode($data);
 
@@ -68,13 +71,17 @@ class HuertoController extends AbstractController
         $huerto->setDisponibilidad($huerto_stClass->disponibilidad);
         $huerto->setIdUsuario($huerto_stClass->idUsuario);
 
+        $er->persist($huerto);
+        $er->flush();
+
         return $this->json([
-            'messsage' => "Huerto añadido correctamente"
+            'messsage' => "Huerto añadido correctamente",
+            'huerto' => $huerto
         ]);
     }
 
     /**
-     * @Route("/huerto/{id}", name="huerto-delete", methods="delete")
+     * @Route("/huertos/{id}", name="huerto-delete", methods="delete")
      */
 
     public function deleteHuerto($id){
@@ -90,9 +97,9 @@ class HuertoController extends AbstractController
     }
 
     /**
-     * @Route("/huerto/{id}", name="huerto-update", methods="update")
+     * @Route("/huertos/{id}", name="huerto-update", methods="put")
      */
-    public function updateHuerto2($id, Request $request ){
+    public function updateHuerto($id, Request $request ){
 
         $er = $this->getDoctrine()->getManager();
         

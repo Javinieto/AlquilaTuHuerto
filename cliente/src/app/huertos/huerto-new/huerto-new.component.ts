@@ -50,10 +50,12 @@ export class HuertoNewComponent implements OnInit {
     if (this.huertoForm.valid) {
       if (this.huertoForm.dirty) {
         this.huerto = this.huertoForm.value;
-        this.huerto.id = this.huertoId + 1;
-
         this.huertoService.createHuerto(this.huerto).subscribe(
-          () => this.onSaveComplete(),
+          (data) => {
+            this.onSaveComplete();
+            this.huerto = data;
+            this.huerto.id = data.id + 1;
+          },
           (error: any) => (this.errorMessage = <any>error)
         );
       } else {

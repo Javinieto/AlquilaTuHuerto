@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./huerto-detail.component.css'],
 })
 export class HuertoDetailComponent implements OnInit {
-  huerto: Huerto = {
+  public huerto: Huerto = {
     id: 0,
     name: '',
     image: '',
@@ -19,6 +19,7 @@ export class HuertoDetailComponent implements OnInit {
     idUsuario: '',
   };
   huertoId: number = 0;
+  public isloading: Boolean = true;
 
   constructor(
     private activatedroute: ActivatedRoute,
@@ -30,12 +31,16 @@ export class HuertoDetailComponent implements OnInit {
     this.huertoId = parseInt(this.activatedroute.snapshot.params['huertoid']);
     this.huertoService
       .getHuertoById(this.huertoId)
-      .subscribe((data: Huerto) => (this.huerto = data));
+      .subscribe((data: Huerto) => {
+        this.isloading = true;
+        this.huerto = data[0];
+        this.isloading = false;
+      });
   }
   goEdit(): void {
-    this.router.navigate(['/huertos', this.huertoId, 'edit']);
+    this.router.navigate(['huertos/', this.huertoId, 'edit']);
   }
   onBack(): void {
-    this.router.navigate(['']);
+    this.router.navigate(['../../app.component.html']);
   }
 }

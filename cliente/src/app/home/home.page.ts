@@ -13,7 +13,7 @@ export class HomePage implements OnInit, ViewDidEnter {
   constructor(private huertoService: HuertoService) {}
   ionViewDidEnter(): void {
     this.huertoService.getHuertos().subscribe((data: Huerto[]) => {
-      this.huertos = data;
+      this.huertos = data[0];
     });
   }
 
