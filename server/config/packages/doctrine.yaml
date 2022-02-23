@@ -1,21 +1,17 @@
 doctrine:
-    dbal:
-        dbname: d458hk9ci5tmne
-        host: ec2-52-73-149-159.compute-1.amazonaws.com
-        port: 5432
-        user: kibgodftjqtqpk
-        password: 4b9b84171b871784f651a7fa1be06e93d28cf7519933f7963376fcaff497deec
-        6
-        driver: pdo_pgsql
-        url: postgres://kibgodftjqtqpk:4b9b84171b871784f651a7fa1be06e93d28cf7519933f7963376fcaff497deec@ec2-52-73-149-159.compute-1.amazonaws.com:5432/d458hk9ci5tmne
+  dbal:
+    url: "%env(resolve:DATABASE_URL)%"
 
-    orm:
-        auto_generate_proxy_classes: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
-        mappings:
-            App:
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+    # IMPORTANT: You MUST configure your server version,
+    # either here or in the DATABASE_URL env var (see .env file)
+    #server_version: '13'
+  orm:
+    auto_generate_proxy_classes: true
+    naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+    auto_mapping: true
+    mappings:
+      App:
+        is_bundle: false
+        dir: "%kernel.project_dir%/src/Entity"
+        prefix: 'App\Entity'
+        alias: App
