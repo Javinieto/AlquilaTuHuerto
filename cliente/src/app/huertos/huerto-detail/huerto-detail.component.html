@@ -1,0 +1,22 @@
+<ion-content>
+    <figure class="figure">
+        <img src="{{ huerto[0].image }}" class="figure-img img-fluid rounded" style="width: 600px; height: 300px" />
+        <figcaption class="figure-caption">
+            <h4>Name: {{ huerto[0].name }}</h4>
+            <h5>Size: {{ huerto[0].size }}</h5>
+            <h5>Disponibilidad: {{ huerto[0].disponibilidad }}</h5>
+            <h5>Productos: {{ huerto[0].productos }}</h5>
+        </figcaption>
+    </figure>
+
+    <div *ngIf="!isLoading" class="row mt-4">
+        <div class="col-md-4">
+            <button class="btn btn-outline-secondary mr-3" style="width: 80px" (click)="onBack()">
+        <i class="fa fa-chevron-left"></i> Back
+      </button>
+            <button class="btn btn-outline-primary" style="width: 80px" (click)="goEdit()">
+        Edit
+      </button>
+        </div>
+    </div>
+</ion-content>
