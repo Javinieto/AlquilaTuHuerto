@@ -36,7 +36,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @Groups("user")
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
